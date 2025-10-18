@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* Core Colors - Light Mode */
+        --color-background: #FFFFFF;
+        /* white */
+        --color-foreground: #1F2937;
+        /* gray-800 */
+        --color-border: #E5E7EB;
+        /* gray-200 */
+        --color-input: #FFFFFF;
+        /* white */
+        --color-ring: #2563EB;
+        /* blue-600 */
+
+        /* Card Colors */
+        --color-card: #FFFFFF;
+        /* white */
+        --color-card-foreground: #1F2937;
+        /* gray-800 */
+
+        /* Popover Colors */
+        --color-popover: #FFFFFF;
+        /* white */
+        --color-popover-foreground: #1F2937;
+        /* gray-800 */
+
+        /* Muted Colors */
+        --color-muted: #F3F4F6;
+        /* gray-100 */
+        --color-muted-foreground: #6B7280;
+        /* gray-500 */
+
+        /* Primary Colors */
+        --color-primary: #2563EB;
+        /* blue-600 */
+        --color-primary-foreground: #FFFFFF;
+        /* white */
+
+        /* Secondary Colors */
+        --color-secondary: #10B981;
+        /* emerald-500 */
+        --color-secondary-foreground: #FFFFFF;
+        /* white */
+
+        /* Accent Colors */
+        --color-accent: #F3F4F6;
+        /* gray-100 */
+        --color-accent-foreground: #1F2937;
+        /* gray-800 */
+
+        /* Success Colors */
+        --color-success: #10B981;
+        /* emerald-500 */
+        --color-success-foreground: #FFFFFF;
+        /* white */
+
+        /* Warning Colors */
+        --color-warning: #F59E0B;
+        /* amber-500 */
+        --color-warning-foreground: #FFFFFF;
+        /* white */
+
+        /* Error/Destructive Colors */
+        --color-error: #EF4444;
+        /* red-500 */
+        --color-error-foreground: #FFFFFF;
+        /* white */
+        --color-destructive: #EF4444;
+        /* red-500 */
+        --color-destructive-foreground: #FFFFFF;
+        /* white */
+
+        /* Glassmorphism Variables */
+        --glass-backdrop-blur: 8px;
+        --glass-opacity: 0.95;
+
+        /* Shadow Variables */
+        --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+        /* Animation Variables */
+        --animation-fast: 150ms;
+        --animation-medium: 300ms;
+        --animation-slow: 500ms;
+        --animation-page: 800ms;
+        --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    /* Glassmorphism utility classes */
+    .glass-card {
+        backdrop-filter: blur(var(--glass-backdrop-blur));
+        background: rgba(255, 255, 255, var(--glass-opacity));
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Animation utilities */
+    .animate-smooth {
+        transition: all var(--animation-fast) var(--ease-smooth);
+    }
+
+    .animate-medium {
+        transition: all var(--animation-medium) var(--ease-smooth);
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+
+        .animate-smooth,
+        .animate-medium,
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+@layer components {
+
+    /* Navigation specific styles */
+    .nav-item {
+        @apply relative px-4 py-2 text-sm font-medium hover:text-foreground transition-colors duration-150;
+    }
+
+    .nav-item.active {
+        @apply text-primary;
+    }
+
+    .nav-item.active::after {
+        @apply absolute bottom-0 left-0 right-0 h-0.5 bg-primary content-[''];
+    }
+
+    /* CTA button styles */
+    .nav-cta {
+        @apply bg-primary text-primary-foreground px-6 py-2 rounded-md font-medium transition-colors duration-150;
+    }
+
+    /* Mobile menu styles */
+    .mobile-menu-overlay {
+        @apply fixed inset-0 backdrop-blur-sm z-50;
+    }
+
+    .mobile-menu-content {
+        @apply fixed inset-y-0 right-0 w-full max-w-sm bg-card border-l border-border shadow-modal;
+    }
+}
